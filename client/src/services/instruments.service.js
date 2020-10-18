@@ -1,16 +1,20 @@
 import axios from 'axios';
 import Config from '../config.json';
 
-function getInstruments() {
-    return axios(`${Config.API_URL}/api/instruments/`);
+const getBaseURL = () =>{
+    return `${Config.API_URL}/instruments`;
 }
 
-function deleteInstrument(instrumentId) {
-    return axios.delete(`${Config.API_URL}/api/instruments/${instrumentId}`);
+const getInstruments = () => {
+    return axios.get(getBaseURL());
 }
 
-function addInstrument(instrument) {
-    return axios.post(`${Config.API_URL}/api/instruments/`, instrument);
+const deleteInstrument = instrumentId => {
+    return axios.delete(`${getBaseURL()}/${instrumentId}`);
+}
+
+const addInstrument = instrument => {
+    return axios.post(getBaseURL(), instrument);
 }
 
 export default {
